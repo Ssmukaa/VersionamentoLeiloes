@@ -28,7 +28,7 @@ public class ProdutosDAO {
         try {
             prep = conn.prepareStatement("insert into produtos (nome,valor,status) values (?,?,?)");
             prep.setString(1,produto.getNome());
-            prep.setInt(2,produto.getValor());
+            prep.setDouble(2,produto.getValor());
             prep.setString(3,produto.getStatus());
             Status = prep.executeUpdate();
             return Status;

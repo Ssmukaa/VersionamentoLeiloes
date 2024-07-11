@@ -17,7 +17,7 @@ public class conectaDAO {
     public boolean connectDB(){
        
         
-        url = "jdbc:mysql://localhost/uc11";
+        url = "jdbc:mysql://localhost:3306/uc11";
         user = "root";
         password = "88664897";
         

@@ -154,8 +154,8 @@ public class cadastroVIEW extends javax.swing.JFrame {
         if(conectar == false){
             JOptionPane.showMessageDialog(null,"Não foi possível se conectar com o banco de dados");
         }else{
-            produto.setNome(nome);
-        produto.setValor(Integer.parseInt(valor));
+        produto.setNome(nome);
+        produto.setValor(Double.parseDouble(valor));
         produto.setStatus(status);
             
         }

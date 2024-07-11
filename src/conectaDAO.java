@@ -8,12 +8,14 @@ import javax.swing.JOptionPane;
 
 public class conectaDAO {
     
+        Connection conn = null;
+         
         String url;
         String user;
         String password;
     
     public boolean connectDB(){
-        Connection conn = null;
+       
         
         url = "jdbc:mysql://localhost/uc11";
         user = "root";
@@ -30,6 +32,13 @@ public class conectaDAO {
             return false;
         }
         
+    }
+    public void desconectar(){
+        try{
+            conn.close();;
+        }catch(SQLException ex){
+            
+        }
     }
     
 }

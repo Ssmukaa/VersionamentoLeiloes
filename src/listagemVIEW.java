@@ -1,5 +1,7 @@
 
 import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -17,6 +19,7 @@ public class listagemVIEW extends javax.swing.JFrame {
      * Creates new form listagemVIEW
      */
     public listagemVIEW() {
+        listarProdutos();
         initComponents();
         listarProdutos();
     }
@@ -202,24 +205,28 @@ public class listagemVIEW extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void listarProdutos(){
-        try {
-            ProdutosDAO produtosdao = new ProdutosDAO();
-            
-            DefaultTableModel model = (DefaultTableModel) listaProdutos.getModel();
-            model.setNumRows(0);
-            
-            ArrayList<ProdutosDTO> listagem = produtosdao.listarProdutos();
-            
-            for(int i = 0; i < listagem.size(); i++){
-                model.addRow(new Object[]{
-                    listagem.get(i).getId(),
-                    listagem.get(i).getNome(),
-                    listagem.get(i).getValor(),
-                    listagem.get(i).getStatus()
-                });
-            }
-        } catch (Exception e) {
-        }
+        ProdutosDAO dao = new ProdutosDAO();
+        conectaDAO cDao = new conectaDAO();
+        boolean Status = cDao.connectDB();
     
+        if(Status == false){
+            JOptionPane.showMessageDialog(null,"Erro ao conectar no banco de dados");
+        }else{
+            List<ProdutosDTO> listaPro = dao.listarProdutos();
+            DefaultTableModel tabelaProdutos = (DefaultTableModel) listaProdutos.getModel();
+            tabelaProdutos.setNumRows(0);
+            
+            for(ProdutosDTO p: listaPro){
+                Object[] obj = new Object[]{
+                   p.getId(),
+                   p.getNome(),
+                   p.getValor(),
+                   p.getStatus()
+                };
+                tabelaProdutos.addRow(obj);
+            }
+            cDao.desconectar();
+        }
+        
     }
 }

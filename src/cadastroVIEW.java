@@ -157,7 +157,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
         produto.setNome(nome);
         produto.setValor(Double.parseDouble(valor));
         produto.setStatus(status);
-            
+            JOptionPane.showMessageDialog(null,"Cadastro salvo com sucesso");
         }
         con.desconectar();
         

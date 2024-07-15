@@ -235,11 +235,12 @@ public class listagemVIEW extends javax.swing.JFrame {
         ProdutosDAO dao = new ProdutosDAO();
         conectaDAO cDao = new conectaDAO();
         boolean Status = cDao.connectDB();
+        String filtro = "";
     
         if(Status == false){
             JOptionPane.showMessageDialog(null,"Erro ao conectar no banco de dados");
         }else{
-            List<ProdutosDTO> listaPro = dao.listarProdutos();
+            List<ProdutosDTO> listaPro = dao.listarProdutos(filtro);
             DefaultTableModel tabelaProdutos = (DefaultTableModel) listaProdutos.getModel();
             tabelaProdutos.setNumRows(0);
             

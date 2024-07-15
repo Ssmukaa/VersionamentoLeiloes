@@ -47,12 +47,23 @@ public class ProdutosDAO {
         
     }
     
-    public List<ProdutosDTO> listarProdutos(){
+    public List<ProdutosDTO> listarProdutos(String status){
             
+        
         try {
             conectaDAO conector = new conectaDAO();
             conector.connectDB();
-            prep = conector.conn.prepareStatement("Select * from produtos");
+            
+            String filtro = ("Select * from produtos");
+            
+            if(!status.isEmpty()){
+                filtro = filtro + "where status = ?";
+                prep = conector.conn.prepareStatement(filtro);
+                prep.setString(1,status);
+            }else{
+            
+            prep = conector.conn.prepareStatement(filtro);
+            }
             resultset = prep.executeQuery();
             
             List<ProdutosDTO> lista = new ArrayList<>();

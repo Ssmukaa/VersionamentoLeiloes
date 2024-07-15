@@ -76,7 +76,51 @@ public class ProdutosDAO {
         
     }
     
+    public int atualizar(ProdutosDTO produto){
+        conectaDAO conector = new conectaDAO();
+        conector.connectDB();
+       
+        int status;
+        try {
+             prep = conector.conn.prepareStatement("update produtos set status = ? where id = ?");
+             prep.setString(1,produto.getStatus());
+             prep.setInt(2,produto.getId());
+             status = prep.executeUpdate();
+             return status;
+            
+        }catch(SQLException ex) {
+            System.out.println("Erro "+ ex.getMessage());
+            return ex.getErrorCode();
+        }
+    }
     
+    public ProdutosDTO consultar(int id){
+            conectaDAO conector = new conectaDAO();
+            conector.connectDB();
+            
+            ProdutosDTO produto = new ProdutosDTO();
+             
+        try {
+            
+            prep = conector.conn.prepareStatement("Select * from produtos where id = ? ");
+            prep.setInt(1,id);
+            resultset = prep.executeQuery();
+            
+            if(resultset.next()){
+                produto.setId(resultset.getInt("id"));
+                produto.setNome(resultset.getString("Nome"));
+                produto.setValor(resultset.getDouble("Valor"));
+                produto.setStatus(resultset.getString("Status"));
+                return produto;
+            }else{
+                return null;
+            }
+
+        }catch(SQLException ex) {
+            System.out.println("Erro "+ ex.getMessage());
+            return null;
+            }
+    }
     
         
 }

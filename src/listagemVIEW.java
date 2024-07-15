@@ -56,6 +56,11 @@ public class listagemVIEW extends javax.swing.JFrame {
                 "ID", "Nome", "Valor", "Status"
             }
         ));
+        listaProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaProdutosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(listaProdutos);
 
         jLabel1.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
@@ -140,8 +145,27 @@ public class listagemVIEW extends javax.swing.JFrame {
     private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
         String id = id_produto_venda.getText();
         
+        ProdutosDTO produto = new ProdutosDTO();
         ProdutosDAO produtosdao = new ProdutosDAO();
-        
+        conectaDAO conect = new conectaDAO();
+        boolean con = conect.connectDB();
+        if(con == false){
+            JOptionPane.showMessageDialog(null,"Erro ao conectar com o banco de dados");
+        }else{
+             produto = produtosdao.consultar(Integer.parseInt(id));
+        if(produto ==null){
+            JOptionPane.showMessageDialog(null,"Produto não encontrado");
+        }else{
+            produto.setStatus("Vendido");
+            int atualizar = produtosdao.atualizar(produto);
+        if(atualizar ==1){
+            JOptionPane.showMessageDialog(null,"Produto atualizado com sucesso");
+        }else{
+            JOptionPane.showMessageDialog(null,"Erro na alteração");
+             }    
+           }
+        }
+        conect.desconectar();
         //produtosdao.venderProduto(Integer.parseInt(id));
         listarProdutos();
     }//GEN-LAST:event_btnVenderActionPerformed
@@ -154,6 +178,10 @@ public class listagemVIEW extends javax.swing.JFrame {
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void listaProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaProdutosMouseClicked
+        
+    }//GEN-LAST:event_listaProdutosMouseClicked
 
     /**
      * @param args the command line arguments

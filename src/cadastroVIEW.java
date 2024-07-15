@@ -157,7 +157,13 @@ public class cadastroVIEW extends javax.swing.JFrame {
         produto.setNome(nome);
         produto.setValor(Double.parseDouble(valor));
         produto.setStatus(status);
+        int salvar = dao.cadastrarProduto(produto);
+        if(salvar == 1){
             JOptionPane.showMessageDialog(null,"Cadastro salvo com sucesso");
+        }else{
+            JOptionPane.showMessageDialog(null,"Erro ao salvar o filme");
+        }
+            
         }
         con.desconectar();
         

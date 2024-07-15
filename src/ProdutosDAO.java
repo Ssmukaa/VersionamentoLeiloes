@@ -25,9 +25,12 @@ public class ProdutosDAO {
     ArrayList<ProdutosDTO> listagem = new ArrayList<>();
     
     public int cadastrarProduto (ProdutosDTO produto){
+        conectaDAO conector = new conectaDAO();
+        conector.connectDB();
+        
         int Status;
         try {
-            prep = conn.prepareStatement("insert into produtos (nome,valor,status) values (?,?,?)");
+            prep = conector.conn.prepareStatement("insert into produtos (nome,valor,status) values (?,?,?)");
             prep.setString(1,produto.getNome());
             prep.setDouble(2,produto.getValor());
             prep.setString(3,produto.getStatus());
@@ -45,9 +48,11 @@ public class ProdutosDAO {
     }
     
     public List<ProdutosDTO> listarProdutos(){
-        
+            
         try {
-            prep = conn.prepareStatement("Select * from produtos");
+            conectaDAO conector = new conectaDAO();
+            conector.connectDB();
+            prep = conector.conn.prepareStatement("Select * from produtos");
             resultset = prep.executeQuery();
             
             List<ProdutosDTO> lista = new ArrayList<>();

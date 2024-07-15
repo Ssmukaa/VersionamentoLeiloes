@@ -8,18 +8,14 @@ import javax.swing.JOptionPane;
 
 public class conectaDAO {
     
-        Connection conn = null;
-         
-        String url;
-        String user;
-        String password;
+        Connection conn;
     
     public boolean connectDB(){
        
         
-        url = "jdbc:mysql://localhost:3306/uc11";
-        user = "root";
-        password = "88664897";
+        String url = "jdbc:mysql://localhost:3306/uc11";
+        String user = "root";
+        String password = "88664897";
         
         try {
             

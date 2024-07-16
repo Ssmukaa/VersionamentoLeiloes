@@ -57,7 +57,7 @@ public class ProdutosDAO {
             String filtro = ("Select * from produtos");
             
             if(!status.isEmpty()){
-                filtro = filtro + "where status = ?";
+                filtro = filtro + " where status = ?";
                 prep = conector.conn.prepareStatement(filtro);
                 prep.setString(1,status);
             }else{

@@ -19,6 +19,7 @@ public class Vendas extends javax.swing.JFrame {
      */
     public Vendas() {
         initComponents();
+        listarProdutos();
     }
 
     /**
@@ -91,7 +92,9 @@ public class Vendas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtVoltarActionPerformed
-        // TODO add your handling code here:
+        listagemVIEW lista = new listagemVIEW();
+        lista.setVisible(true);
+        dispose();
     }//GEN-LAST:event_BtVoltarActionPerformed
 
     /**
